@@ -19,9 +19,6 @@ async fn main() -> Result<(), Box<dyn Error>> {
     greeting_post.push_str(&opt.name);
     greeting_post.push_str("\"}");
 
-    //let body = reqwest::get("http://localhost:3000").await?.text().await?;
-    //let body = reqwest::post("http://localhost:3000/v1/greet").body(greetingPost).await?.text().await?;
-
     let client = reqwest::Client::new();
     let resp = client
         .post("http://localhost:3000/v1/greet")
@@ -31,7 +28,6 @@ async fn main() -> Result<(), Box<dyn Error>> {
         .await?;
 
     let body = resp.bytes().await?;
-
 
     println!("{}", String::from_utf8_lossy(body.borrow()).to_string());
     Ok(())
